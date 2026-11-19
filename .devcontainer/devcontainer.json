@@ -1,0 +1,18 @@
+{
+  "name": "SE Spaceship (Java 21 + Maven)",
+  "image": "mcr.microsoft.com/devcontainers/java:21",
+  "features": {
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "none",
+      "installMaven": "true"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack"
+      ]
+    }
+  },
+  "postCreateCommand": "mvn -B -q test-compile && mvn -B -q org.pitest:pitest-maven:help"
+}
