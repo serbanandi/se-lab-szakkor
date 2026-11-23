@@ -6,7 +6,7 @@
 
 ## The task
 
-Let an agent write unit tests for the `GT4500` spaceship in `src/test/java/hu/bme/mit/spaceship/GT4500LlmTest.java`. The specification is the Javadoc of `GT4500.fireTorpedo`. **Coverage** is the share of lines or branches the tests execute. **Mutation score** is the share of small artificial bugs (mutants) that make at least one test fail.
+Let an agent write unit tests for the `GT4500` spaceship in `src/test/java/hu/bme/mit/spaceship/GT4500LlmTest.java`. The specification is the Javadoc of `GT4500.fireTorpedo` and `GT4500.fireLaser`. **Coverage** is the share of lines or branches the tests execute. **Mutation score** is the share of small artificial bugs (mutants) that make at least one test fail.
 
 ## Your 15 minutes
 

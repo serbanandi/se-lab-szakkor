@@ -32,8 +32,8 @@ The project represents an alpha version of a spaceship.
 - The ship (`SpaceShip` interface) can fire one or more lasers or torpedoes.
 - We have only one spaceship as of now (`GT4500`).
 - Two firing modes (`FiringMode`) are supported: firing only one or all instances of a given weapon type.
-- Lasers are not yet implemented, but the torpedo stores are ready (`TorpedoStore`).
-- The rules for firing torpedoes are in the Javadoc comment of `GT4500.fireTorpedo`: this is the **specification** to test against.
-- `GT4500` has a constructor that takes its two `TorpedoStore`s, so unit tests can replace them with Mockito mocks; the no-argument constructor creates two real stores.
+- The ship has two torpedo stores (`TorpedoStore`) and four lasers, which take their energy from a `PowerCore` (`Battery` is a simple one) and cool over time.
+- The rules for firing are in the Javadoc comments of `GT4500.fireTorpedo` and `GT4500.fireLaser`: these are the **specification** to test against.
+- `GT4500` has a constructor that takes its two `TorpedoStore`s, `PowerCore` and `Clock`, so unit tests can replace them with Mockito mocks; the no-argument constructor creates real ones.
 - `TorpedoStore` can randomly fail to fire; set the `IVT_RATE` environment variable (0.0 to 1.0) to control the failure rate (default: 0.0).
-- `GT4500Test` contains two starter tests. They pass and cover a good part of the code, but they are not proper unit tests (no isolation), and they check very little. Run PIT to see how little.
+- `GT4500Test` contains two starter tests. They pass, but they are not proper unit tests (no isolation), and they check very little. Run PIT to see how little.

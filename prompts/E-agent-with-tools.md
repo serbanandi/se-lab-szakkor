@@ -15,7 +15,7 @@ On Windows, use Command Prompt (cmd), not PowerShell.
 ```text
 Write comprehensive unit tests for GT4500. The goal is maximum branch coverage and maximum PIT mutation score for GT4500.
 
-The class is src/main/java/hu/bme/mit/spaceship/GT4500.java. Its specification is the Javadoc of GT4500.fireTorpedo; test against that. Write one JUnit 5 + Mockito test class named GT4500LlmTest in package hu.bme.mit.spaceship, in the file src/test/java/hu/bme/mit/spaceship/GT4500LlmTest.java. GT4500 has a constructor that takes its two TorpedoStore objects, so they can be mocked.
+The class is src/main/java/hu/bme/mit/spaceship/GT4500.java. Its specification is the Javadoc of GT4500.fireTorpedo and GT4500.fireLaser; test against that. Write one JUnit 5 + Mockito test class named GT4500LlmTest in package hu.bme.mit.spaceship, in the file src/test/java/hu/bme/mit/spaceship/GT4500LlmTest.java. GT4500 has a constructor that takes its two TorpedoStore objects, PowerCore and Clock, so they can be mocked.
 
 Work in iterations: write the tests, measure, look at the report and the surviving mutants, improve the tests, and measure again.
 
