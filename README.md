@@ -20,6 +20,7 @@ You need **Java 21+**. Maven is optional: the Maven wrapper (`./mvnw`, or `mvnw.
 | Mutation testing | `./mvnw test-compile org.pitest:pitest-maven:mutationCoverage` | `target/pit-reports/index.html` (and `mutations.xml`) |
 
 The generated tests go in `src/test/java/hu/bme/mit/spaceship/GT4500LlmTest.java`. On Windows, use Command Prompt and write `.\mvnw.cmd` in place of `./mvnw`.
+PIT uses the `STRONGER` group of mutation operators (`pit.mutators` in `pom.xml`). To try others at home, see [HANDOUT.md](HANDOUT.md#at-home-try-other-mutation-operators).
 `scripts/report.py` summarises the results and lists the surviving mutants. The prompts are in [prompts/](prompts/README.md).
 
 Dependencies already configured: JUnit 5, Mockito (incl. `mockito-junit-jupiter`), JaCoCo, PIT (with the JUnit 5 plugin).

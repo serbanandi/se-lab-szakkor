@@ -17,6 +17,10 @@
 
 		<!-- test classes PIT runs; override with -Dpit.targetTests=... (quote it in PowerShell) -->
 		<pit.targetTests>hu.bme.mit.spaceship.*</pit.targetTests>
+
+		<!-- PIT mutation operators: a group (DEFAULTS, STRONGER, ALL) or a comma-separated list of operators;
+		     override with -Dpit.mutators=... (quote it in PowerShell) -->
+		<pit.mutators>STRONGER</pit.mutators>
 	</properties>
 
 	<dependencies>
@@ -100,9 +104,7 @@
 					<targetTests>
 						<param>${pit.targetTests}</param>
 					</targetTests>
-					<mutators>
-						<mutator>DEFAULTS</mutator>
-					</mutators>
+					<mutators>${pit.mutators}</mutators>
 					<outputFormats>
 						<outputFormat>HTML</outputFormat>
 						<outputFormat>XML</outputFormat>

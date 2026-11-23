@@ -85,3 +85,18 @@ To keep a result, commit it in the worktree first, and don't delete its branch. 
 ```
 git worktree add --no-track ../se-lab-bonus -b try/bonus origin/planted-bug
 ```
+
+## At home: try other mutation operators
+
+A mutation score only tells you about the kinds of bugs PIT was asked to plant. The session uses the `STRONGER` group. Measure the same tests again with another group:
+
+- Windows: `.\mvnw.cmd test -Pllm -Dpit.mutators=ALL`
+- Linux: `./mvnw test -Pllm -Dpit.mutators=ALL`
+
+Try `DEFAULTS` (fewer mutants), `ALL` (many more), or a list such as `NEGATE_CONDITIONALS,VOID_METHOD_CALLS`; the [PIT documentation](https://pitest.org/quickstart/mutators/) describes them. Then run `report.py --survivors --with-source` and think about:
+
+- Does 100% with one group stay 100% with another? What does that say about the score?
+- Which survivors show a missing test, and which are equivalent mutants that no test can kill?
+- Does the ranking of the strategies change?
+
+Scores from different groups aren't comparable. **In the session, keep the default**, and don't add these results to the shared sheet.
