@@ -24,15 +24,15 @@ Check with `java -version`. The Maven wrapper (`mvnw`) needs `java` on PATH or `
 Pick **one** (same steps on Windows and Linux):
 
 - **GitHub Copilot in VS Code**: install [VS Code](https://code.visualstudio.com/), sign in with GitHub, and check that agent mode is available in the Chat view. Students can get Copilot free through the [GitHub Student Developer Pack](https://education.github.com/pack).
-- **Google Antigravity**: install [Antigravity](https://antigravity.google/) and sign in with a Google account.
+- **Google Antigravity**: install [Antigravity](https://antigravity.google/) and sign in with a Google account. if you have a Google AI subscription (was free/discounted for students over the past year), you can use it.
 - **Claude Code**: follow the [official install instructions](https://code.claude.com/docs/en/setup) and sign in. It needs a Claude subscription or API credits.
 
-**Try it:** open an empty test folder, and ask the agent to create a file there and then change it. This shows login, quota and region problems now and not during the session.
+**Try it:** if you haven't used any of the agents before, open an empty test folder, and ask the agent to create a file there and then change it. If this works you should be good to go. If not, check the agent's documentation for troubleshooting.
 
 ## 5. Clone the repository
 
 ```
-git clone <REPO_URL>
+git clone https://github.com/serbanandi/se-lab-szakkor.git
 cd se-lab-szakkor
 ```
 
@@ -41,7 +41,7 @@ cd se-lab-szakkor
 - Windows: `py scripts/check_setup.py`
 - Linux: `python3 scripts/check_setup.py`
 
-The first run downloads everything the session needs. Fix what it reports and run it again until the last line is `READY`. If it still fails, email `<INSTRUCTOR_EMAIL>` with the full output.
+The first run downloads everything the session needs. Fix what it reports and run it again until the last line is `READY`. 
 
 ## Troubleshooting
 
