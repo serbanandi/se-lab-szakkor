@@ -22,3 +22,6 @@ target/
 *.project
 .settings/
 .vscode/
+
+# surviving mutants written in strategy D
+survivors.txt
