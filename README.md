@@ -1,5 +1,7 @@
 # SE Spaceship: LLM test generation demo
 
+**Before the session:** follow [SETUP.md](SETUP.md) until the self-check says `READY`.
+
 A small Java project for experimenting with **LLM-based unit test generation**, **code coverage** and **mutation testing**.
 It is based on the sample application of the [Software Engineering](http://www.mit.bme.hu/oktatas/targyak/vimiab04) course at BME MIT.
 
