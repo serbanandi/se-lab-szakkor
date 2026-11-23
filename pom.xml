@@ -14,6 +14,9 @@
 		<jacoco.version>0.8.15</jacoco.version>
 		<pitest.version>1.30.2</pitest.version>
 		<pitest.junit5.version>1.2.3</pitest.junit5.version>
+
+		<!-- test classes PIT runs; override with -Dpit.targetTests=... (quote it in PowerShell) -->
+		<pit.targetTests>hu.bme.mit.spaceship.*</pit.targetTests>
 	</properties>
 
 	<dependencies>
@@ -62,6 +65,10 @@
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
+						<configuration>
+							<!-- every run starts fresh, so earlier runs never add coverage -->
+							<append>false</append>
+						</configuration>
 					</execution>
 					<execution>
 						<id>report</id>
@@ -91,7 +98,7 @@
 						<param>hu.bme.mit.spaceship.*</param>
 					</targetClasses>
 					<targetTests>
-						<param>hu.bme.mit.spaceship.*</param>
+						<param>${pit.targetTests}</param>
 					</targetTests>
 					<mutators>
 						<mutator>DEFAULTS</mutator>
@@ -105,4 +112,41 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<!-- Measure only the generated tests (coverage + PIT): `mvnw test -Pllm` -->
+		<profile>
+			<id>llm</id>
+			<properties>
+				<test>GT4500LlmTest</test>
+				<pit.targetTests>hu.bme.mit.spaceship.GT4500LlmTest</pit.targetTests>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.pitest</groupId>
+						<artifactId>pitest-maven</artifactId>
+						<executions>
+							<execution>
+								<id>pit</id>
+								<phase>test</phase>
+								<goals>
+									<goal>mutationCoverage</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<!-- Compile and run only the generated tests, no coverage, no PIT: `mvnw test -Pcheck` -->
+		<profile>
+			<id>check</id>
+			<properties>
+				<test>GT4500LlmTest</test>
+				<jacoco.skip>true</jacoco.skip>
+			</properties>
+		</profile>
+	</profiles>
 </project>
