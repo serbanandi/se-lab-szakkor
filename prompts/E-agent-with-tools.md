@@ -5,7 +5,7 @@
 On Windows, use Command Prompt (cmd), not PowerShell.
 
 1. Open your agent in the `se-lab-E` worktree, and only there. Start a **new conversation** in **agent mode**.
-2. Copy the prompt below as it is and send it. Wait until the agent finishes. It may run the check command, the report script and at most 5 measure runs.
+2. Copy the prompt below as it is and send it. Wait until the agent finishes. It may run the check command, the report script and at most 3 measure runs.
 3. Measure in the worktree: Windows `.\mvnw.cmd test -Pllm`, Linux `./mvnw test -Pllm`
 4. Look at the result: Windows `py scripts/report.py`, Linux `python3 scripts/report.py`
 5. Fill in a row of the shared sheet by hand, as strategy E (see [HANDOUT.md](../HANDOUT.md)).
@@ -35,6 +35,7 @@ Tools:
 
 Rules:
 - Run the measure command at most 3 times.
-- Do not modify production code; equivalent mutants may be impossible to kill, so say which ones you think they are and stop.
+- Do not modify production code
+- Equivalent mutants may be impossible to kill, so say which ones you think they are and stop.
 - If a test fails, decide from the Javadoc whether the test or the code is wrong. Never change an assertion just to make it pass. If you think the code is wrong, leave the test failing and say so.
 ```
