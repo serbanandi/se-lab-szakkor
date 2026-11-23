@@ -23,6 +23,12 @@ git worktree add ../se-lab-B -b try/B
 
 (Use `C` or `E` in place of `B` if that's your number.) Each worktree is a separate checkout of `main` with its own files and build output, so your attempts can't contaminate each other. The Maven cache is shared, so nothing is downloaded again.
 
+Trying a strategy with several agents? Give each its own worktree, and add a suffix to the branch:
+
+```
+git worktree add ../se-lab-B/copilot -b try/B-copilot
+```
+
 **Open the agent in that folder, and only that folder:**
 
 | Agent | How |
@@ -40,21 +46,17 @@ Start a **new agent conversation** for each strategy, so nothing carries over. (
 1. Open the agent in the worktree and paste the prompt from `prompts/<X>.md`. Wait until it finishes.
 2. Measure: Windows `.\mvnw.cmd test -Pllm`, Linux `./mvnw test -Pllm`
 3. Look: Windows `py scripts/report.py`, Linux `python3 scripts/report.py`
-4. Print your row (below) and paste it into the [shared sheet](<SHARED_SHEET_LINK>).
+4. Fill in one row of the [shared sheet](<SHARED_SHEET_LINK>) (below).
 
-## Submitting
+## Filling in the sheet
 
-Once, save who you are (harness: `GitHub Copilot`, `Google Antigravity`, `Claude Code` or `Other`):
+Type one row per strategy into `Results`, in the first empty row:
 
-- Windows: `py scripts/report.py --save --name "Your Name" --harness "Claude Code" --model "model name"`
-- Linux: `python3 scripts/report.py --save --name "Your Name" --harness "Claude Code" --model "model name"`
-
-Then, for each strategy, in its worktree:
-
-- Windows: `py scripts/report.py --row --fixed no --saw-metrics no`
-- Linux: `python3 scripts/report.py --row --fixed no --saw-metrics no`
-
-In `se-lab-AD`, add `--strategy A` or `--strategy D`. Answer `--fixed` and `--saw-metrics` from the transcript ([how](prompts/README.md#the-two-questions-only-you-can-answer)). If you sent more prompts than planned, add `--rounds N`. Anything surprising: `--notes "..."`. Click the **first empty cell of column A** in `Results` and paste.
+- **You:** name, strategy (A–E), harness (`GitHub Copilot`, `Google Antigravity`, `Claude Code` or `Other`), exact model name.
+- **Rounds:** the prompts you sent (A–C: 1, D: 2, E: usually 1).
+- **From `report.py`, the `GT4500` block only** (not `TorpedoStore`): line and branch coverage, mutation score, killed, survived, no coverage and total, plus tests and uses mocks from the last lines. Type percentages as whole numbers without `%`. If any mutants timed out, add them to killed.
+- **From the transcript:** agent fixed failures, agent saw quality metrics ([how](prompts/README.md#the-two-questions-only-you-can-answer)).
+- **Notes:** anything surprising.
 
 ## Cleaning up
 
@@ -76,7 +78,6 @@ To keep a result, commit it in the worktree first, and don't delete its branch. 
 - **The agent asks to run a command in A–D:** allow only the check command (Windows `.\mvnw.cmd test -Pcheck`, Linux `./mvnw test -Pcheck`).
 - **The agent changed production code:** `git diff src/main` shows it. Discard the attempt: remove the worktree with `--force`, delete its branch and start again.
 - **The measure command fails because a test fails:** see [prompts/README.md](prompts/README.md#if-the-agent-leaves-a-test-failing).
-- **The whole row lands in one cell:** the terminal turned the tabs into spaces. Add `> row.txt` to the `--row` command, open `row.txt` in an editor and copy from there.
 
 ## At-home bonus
 

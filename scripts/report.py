@@ -6,9 +6,7 @@ Run from the root of a worktree, after the measure command:
 """
 import argparse
 import csv
-import json
 import re
-import subprocess
 import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -18,11 +16,7 @@ PIT = Path("target/pit-reports/mutations.xml")
 PACKAGE = Path("hu/bme/mit/spaceship")
 MAIN_SRC = Path("src/main/java") / PACKAGE
 TEST_FILE = Path("src/test/java") / PACKAGE / "GT4500LlmTest.java"
-CONFIG = Path.home() / ".se-lab-szakkor.json"
 
-STRATEGIES = ["A", "B", "C", "D", "E"]
-HARNESSES = ["GitHub Copilot", "Google Antigravity", "Claude Code", "Other"]
-REMEMBERED = ["name", "harness", "model"]
 MEASURE = ("Run the measure command first:\n"
            "  Windows: .\\mvnw.cmd test -Pllm\n"
            "  Linux:   ./mvnw test -Pllm")
@@ -87,7 +81,7 @@ def mutation_stats(mutants):
 
     detected = sum(m["detected"] for m in mutants)  # as in PIT, includes timed out mutants
     return {
-        "score": percent(detected, len(mutants)), "detected": detected,
+        "score": percent(detected, len(mutants)),
         "killed": count("KILLED"), "survived": count("SURVIVED"),
         "no_coverage": count("NO_COVERAGE"), "timed_out": count("TIMED_OUT"), "total": len(mutants),
     }
@@ -127,6 +121,7 @@ def print_summary():
         print(f"Tests in GT4500LlmTest: none ({TEST_FILE.as_posix()} does not exist)")
     else:
         print(f"Tests in GT4500LlmTest: {count_tests(source)}")
+        print(f"Uses mocks: {'yes' if 'org.mockito' in source else 'no'}")
 
 
 def print_survivors(with_source):
@@ -142,67 +137,10 @@ def print_survivors(with_source):
             print("    " + (lines[m["line"] - 1].strip() if m["line"] <= len(lines) else ""))
 
 
-def branch_letters():
-    try:
-        out = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"], stdout=subprocess.PIPE,
-                             stderr=subprocess.DEVNULL, universal_newlines=True).stdout.strip()
-    except OSError:
-        return ""
-    return out[len("try/"):] if out.startswith("try/") else ""
-
-
-def choose_strategy(given):
-    if given:
-        return given
-    letters = branch_letters()
-    if letters == "AD":
-        raise ReportError("Branch try/AD is used for two strategies: add --strategy A or --strategy D.")
-    return letters if letters in STRATEGIES else ""
-
-
-def print_row(args):
-    source = test_source()
-    if source is None:
-        raise ReportError(f"{TEST_FILE.as_posix()} does not exist. Are you in the right worktree?")
-    strategy = choose_strategy(args.strategy)
-    rounds = args.rounds
-    if rounds is None and strategy:
-        rounds = 2 if strategy == "D" else 1
-    line, branch = read_coverage().get("GT4500", (None, None))
-    s = mutation_stats(read_mutants("GT4500"))
-    fields = [
-        args.name, strategy, args.harness, args.model, rounds,
-        count_tests(source), line, branch, s["score"], s["detected"], s["survived"],
-        s["no_coverage"], s["total"],
-        "yes" if "org.mockito" in source else "no", args.fixed, args.saw_metrics, args.notes,
-    ]
-    print("\t".join("" if f is None else " ".join(str(f).split()) for f in fields))
-    print("Click the first empty cell in column A of Results, then paste.", file=sys.stderr)
-
-
-def load_config():
-    try:
-        config = json.loads(CONFIG.read_text(encoding="utf-8"))
-        return config if isinstance(config, dict) else {}
-    except (OSError, ValueError):
-        return {}
-
-
 def parse_args():
     p = argparse.ArgumentParser(description="Summarise coverage and mutation testing results of GT4500.")
-    mode = p.add_mutually_exclusive_group()
-    mode.add_argument("--survivors", action="store_true", help="list the GT4500 mutants that were not killed")
-    mode.add_argument("--row", action="store_true", help="print one tab-separated row for the Results sheet")
+    p.add_argument("--survivors", action="store_true", help="list the GT4500 mutants that were not killed")
     p.add_argument("--with-source", action="store_true", help="with --survivors: add the mutated source line")
-    p.add_argument("--save", action="store_true", help="remember --name, --harness and --model")
-    p.add_argument("--name")
-    p.add_argument("--strategy", choices=STRATEGIES, help="default: taken from the branch")
-    p.add_argument("--harness", choices=HARNESSES)
-    p.add_argument("--model")
-    p.add_argument("--rounds", type=int, help="prompts you sent (default: 2 for D, otherwise 1)")
-    p.add_argument("--fixed", choices=["yes", "no"], help="did the agent fix compile errors or failing tests?")
-    p.add_argument("--saw-metrics", choices=["yes", "no"], help="did the agent see coverage or PIT results?")
-    p.add_argument("--notes")
     return p.parse_args()
 
 
@@ -210,21 +148,9 @@ def main():
     if not sys.stdout.isatty():
         sys.stdout.reconfigure(encoding="utf-8")
     args = parse_args()
-    config = load_config()
-    if args.save:
-        config.update({k: getattr(args, k) for k in REMEMBERED if getattr(args, k) is not None})
-        CONFIG.write_text(json.dumps(config, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        print(f"Saved to {CONFIG}", file=sys.stderr)
-        if not args.row and not args.survivors:
-            return
-    for key in REMEMBERED:
-        if getattr(args, key) is None:
-            setattr(args, key, config.get(key))
     check_reports()
     if args.survivors:
         print_survivors(args.with_source)
-    elif args.row:
-        print_row(args)
     else:
         print_summary()
 

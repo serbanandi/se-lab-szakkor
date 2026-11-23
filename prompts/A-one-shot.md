@@ -8,7 +8,7 @@ On Windows, use Command Prompt (cmd), not PowerShell.
 2. Copy the prompt below as it is and send it. Wait until the agent finishes. It may run only the check command.
 3. Measure in the worktree: Windows `.\mvnw.cmd test -Pllm`, Linux `./mvnw test -Pllm`
 4. Look at the result: Windows `py scripts/report.py`, Linux `python3 scripts/report.py`
-5. Submit with `--row` (see [HANDOUT.md](../HANDOUT.md)), adding `--strategy A`.
+5. Fill in a row of the shared sheet by hand, as strategy A (see [HANDOUT.md](../HANDOUT.md)).
 6. Keep the worktree **and the conversation**: continue with [D-two-shot.md](D-two-shot.md).
 
 ## Prompt

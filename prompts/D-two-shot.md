@@ -5,13 +5,13 @@ On Windows, use Command Prompt (cmd), not PowerShell: PowerShell would write `su
 
 ## What to do
 
-1. Send the round 1 prompt (exactly A's prompt), measure and submit it as A, following [A-one-shot.md](A-one-shot.md). Already done? Go on.
-2. **After** submitting A, write the surviving mutants to a file in the worktree:
+1. Send the round 1 prompt (exactly A's prompt), measure and fill in its row as A, following [A-one-shot.md](A-one-shot.md). Already done? Go on.
+2. **After** filling in A's row, write the surviving mutants to a file in the worktree:
    - Windows: `py scripts/report.py --survivors --with-source > survivors.txt`
    - Linux: `python3 scripts/report.py --survivors --with-source > survivors.txt`
 3. Send the round 2 prompt and wait until the agent finishes.
 4. Measure again: Windows `.\mvnw.cmd test -Pllm`, Linux `./mvnw test -Pllm`
-5. Submit with `--row`, adding `--strategy D` (see [HANDOUT.md](../HANDOUT.md)). `--fixed` and `--saw-metrics` cover both rounds. Reading `survivors.txt` is part of the strategy, so it doesn't count as "saw metrics".
+5. Fill in a row of the shared sheet by hand, as strategy D (see [HANDOUT.md](../HANDOUT.md)). "Agent fixed failures" and "Agent saw quality metrics" cover both rounds. Reading `survivors.txt` is part of the strategy, so it doesn't count as seeing metrics.
 
 ## Prompt, round 1
 
