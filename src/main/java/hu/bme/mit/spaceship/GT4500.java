@@ -15,6 +15,18 @@ public class GT4500 implements SpaceShip {
     this.secondaryTorpedoStore = new TorpedoStore(10);
   }
 
+  /**
+  * Creates a ship with the given torpedo stores
+  * (e.g. to replace them with mocks in unit tests).
+  *
+  * @param primaryTorpedoStore the store fired first in SINGLE mode
+  * @param secondaryTorpedoStore the other store
+  */
+  public GT4500(TorpedoStore primaryTorpedoStore, TorpedoStore secondaryTorpedoStore) {
+    this.primaryTorpedoStore = primaryTorpedoStore;
+    this.secondaryTorpedoStore = secondaryTorpedoStore;
+  }
+
   public boolean fireLaser(FiringMode firingMode) {
     // TODO not implemented yet
     return false;
