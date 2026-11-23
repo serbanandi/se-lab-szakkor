@@ -6,7 +6,6 @@ It is based on the sample application of the [Software Engineering](http://www.m
 ## Getting started
 
 You need **Java 21+**. Maven is optional: the Maven wrapper (`./mvnw`, or `mvnw.cmd` on Windows) downloads it for you.
-Alternatively, open the repository in **GitHub Codespaces** / a VS Code **Dev Container**, where everything is preinstalled.
 
 | What | Command | Report |
 |---|---|---|
