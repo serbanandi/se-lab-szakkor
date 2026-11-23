@@ -41,7 +41,7 @@ cd se-lab-szakkor
 - Windows: `py scripts/check_setup.py`
 - Linux: `python3 scripts/check_setup.py`
 
-The first run downloads everything the session needs. Fix what it reports and run it again until the last line is `READY`. If it still fails, email <INSTRUCTOR_EMAIL> with the full output.
+The first run downloads everything the session needs. Fix what it reports and run it again until the last line is `READY`. If it still fails, email `<INSTRUCTOR_EMAIL>` with the full output.
 
 ## Troubleshooting
 

@@ -15,7 +15,7 @@ You need **Java 21+**. Maven is optional: the Maven wrapper (`./mvnw`, or `mvnw.
 |---|---|---|
 | Build | `./mvnw compile` | |
 | Run tests + coverage | `./mvnw test` | `target/site/jacoco/index.html` |
-| Coverage + PIT, only the generated tests | `./mvnw test -Pllm` | both of the above and below |
+| Coverage + PIT, only the generated tests | `./mvnw test -Pllm` | both reports |
 | Run only the generated tests | `./mvnw test -Pcheck` | |
 | Mutation testing | `./mvnw test-compile org.pitest:pitest-maven:mutationCoverage` | `target/pit-reports/index.html` (and `mutations.xml`) |
 
