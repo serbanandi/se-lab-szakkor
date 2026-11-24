@@ -88,7 +88,7 @@ To keep a result, commit it in the worktree first, and don't delete its branch. 
 git worktree add --no-track ../se-lab-bonus -b try/bonus origin/planted-bug
 ```
 
-What you might encounter here is that the agent happily geenrates a passing test suite for this buggy ship, because it doesn't know this isn't the correct behavior. This is the oracle problem: the agent doesn't know what the correct behavior is, so it can't tell whether a test is right or wrong. It might detect the bug though. In this case, try palying around with other bugs in the ship, and see if the agent can detect them. If it can't, you have a real oracle problem. An interesting approach would be to do this for the mutants that tended to survive PIT testing and see if the agent can detect them. This is a good way to test the agent's ability to reason about the code and its behavior.
+What you might encounter here is that the agent happily generates a passing test suite for this buggy ship, because it doesn't know this isn't the correct behavior. This is the oracle problem: the agent doesn't know what the correct behavior is, so it can't tell whether a test is right or wrong. It might detect the bug though. In this case, try playing around with other bugs in the ship, and see if the agent can detect them. If it can't, you have a real oracle problem. An interesting approach would be to do this for the mutants that tended to survive PIT testing and see if the agent can detect them. This is a good way to test the agent's ability to reason about the code and its behavior.
 
 ### Other mutation operators
 

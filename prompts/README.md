@@ -12,7 +12,7 @@ A branch can have a suffix, e.g. `try/B-copilot`, if you try a strategy with sev
 
 **A and D share one worktree.** D's first round is exactly A: send prompt A, measure and fill in a row as A, then send the D follow-up, measure again and fill in a row as D.
 
-In A–D the agent may run only the **check command** (Windows `.\mvnw.cmd test -Pcheck`, Linux `./mvnw test -Pcheck`). **You** run the **measure command** (Windows `.\mvnw.cmd test -Pllm`, Linux `./mvnw test -Pllm`). Only in E may the agent measure, at most 5 times.
+In A–D the agent may run only the **check command** (Windows `.\mvnw.cmd test -Pcheck`, Linux `./mvnw test -Pcheck`). **You** run the **measure command** (Windows `.\mvnw.cmd test -Pllm`, Linux `./mvnw test -Pllm`). Only in E may the agent measure, at most 3 times.
 
 ## The two questions only you can answer
 
