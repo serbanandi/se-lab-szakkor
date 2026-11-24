@@ -11,7 +11,7 @@ Let an agent write unit tests for the `GT4500` spaceship in `src/test/java/hu/bm
 
 Your task will be to evaluate different mutation-guided test generation strategies. First, you'll generate tests with a simple prompt, evaluate, and improve them based on mutation feedback. The strategies are explained in [prompts/README.md](prompts/README.md).
 
-We'll all document our results in a shared sheet. This will let us compare strategies and see how well the agents did, how different models, prompts and harnesses were influenced by the mutation feedback, allowing us to draw conclusions about the effectiveness of each approach. The sheet is [here](https://bmeedu-my.sharepoint.com/:x:/g/personal/serban_andrada_edu_bme_hu/cQrB7qv3PQc2SbqQv1jTUG_VEgUCHyDE7fYm360i-tG0JlbuCQK).
+We'll all document our results in a shared sheet. This will let us compare strategies and see how well the agents did, how different models, prompts and harnesses were influenced by the mutation feedback, allowing us to draw conclusions about the effectiveness of each approach. The sheet is [here](https://bmeedu-my.sharepoint.com/:x:/g/personal/serban_andrada_edu_bme_hu/cQrB7qv3PQc2SbqQv1jTUG_VEgUCHyDE7fYm360i-tG0JlbuCQ).
 
 ### Creating git worktrees
 
@@ -55,7 +55,7 @@ Start a **new agent conversation** for each strategy, so nothing carries over. (
 
 ### Documenting results
 
-Fill in one row of the [shared sheet](https://bmeedu-my.sharepoint.com/:x:/g/personal/serban_andrada_edu_bme_hu/cQrB7qv3PQc2SbqQv1jTUG_VEgUCHyDE7fYm360i-tG0JlbuCQK).
+Fill in one row of the [shared sheet](https://bmeedu-my.sharepoint.com/:x:/g/personal/serban_andrada_edu_bme_hu/cQrB7qv3PQc2SbqQv1jTUG_VEgUCHyDE7fYm360i-tG0JlbuCQ).
 
 ## Cleaning up
 
